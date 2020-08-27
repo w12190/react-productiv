@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import uuid from "uuid/v4";
+// import uuid from "uuid/v4";
 
 import EditableTodoList from "./EditableTodoList";
 
@@ -15,18 +15,25 @@ import EditableTodoList from "./EditableTodoList";
  */
 
 function TodoApp() {
-
   /** add a new todo to list */
-  function create(newTodo) { }
+  function create(newTodo) {
+    
+  }
 
   /** update a todo with updatedTodo */
-  function update(updatedTodo) { }
+  function update(updatedTodo) {
+
+  }
 
   /** delete a todo by id */
-  function remove(id) { }
+  function remove(id) {
+
+  }
 
   /** get highest-priority todo */
-  function getTopTodo() { }
+  function getTopTodo() {
+
+  }
 
   return (
       <main className="TodoApp">
