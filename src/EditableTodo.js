@@ -12,12 +12,14 @@ import TodoForm from "./TodoForm";
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
 
-function EditableTodo({ todo, update, remove }) {
+function EditableTodo(props) {
+
+  const { todo, update, remove } = props;
   const [isEditing, setIsEditing] = useState(false) //if this is display only
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    setIsEditing(!isEditing) //TODO: potential issue with using previous state
+    setIsEditing(isEditing => !isEditing) // If the new state relies on the old state, use the callback form. 
   }
 
   /** Call remove fn passed to this. */
@@ -26,12 +28,13 @@ function EditableTodo({ todo, update, remove }) {
   }
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
+  // pass and spread the id out for update. 
   function handleSave(formData) {
     update(formData)
     toggleEdit()
   }
 
-  const toDoDisplay = isEditing ? <TodoForm handleSave={handleSave}/> : 
+  const toDoDisplay = isEditing ? <TodoForm initialFormData={todo} handleSave={handleSave} /> :
     <div className="mb-3">
       <div className="float-right text-sm-right">
         <button
@@ -43,7 +46,7 @@ function EditableTodo({ todo, update, remove }) {
           onClick={handleDelete}>
           Del </button>
       </div>
-      <Todo />
+      <Todo todo={todo} />
     </div>
 
   return (

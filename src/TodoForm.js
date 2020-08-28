@@ -10,20 +10,26 @@ import React, { useState } from "react";
  * { TodoApp, EditableTodo } -> TodoForm
  */
 
-function TodoForm({ initialFormData={ title: '', description: '', priority: '' }, handleSave }) {
+
+ // Take out the default for initialFormData. Make a var on top called initial state.
+function TodoForm({ initialFormData = { title: '', description: '', priority: 1 }, handleSave }) {
   const [formData, setFormData] = useState(initialFormData)
+
+  const { title, description, priority } = formData;
 
   /** Update form input. */
   function handleChange(evt) {
     const { name, value } = evt.target
+    console.log("name and value", name, value);
     setFormData(oldFormData => ({ ...oldFormData, [name]: value }))
   }
 
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault()
-    handleSave(formData)
-    setFormData({ title: '', description: '', priority: '' })
+    console.log(formData);
+    handleSave(formData);
+    setFormData({ title: '', description: '', priority: '' }) // repeating here.
   }
 
   return (
@@ -36,7 +42,7 @@ function TodoForm({ initialFormData={ title: '', description: '', priority: '' }
           className="form-control"
           placeholder="Title"
           onChange={handleChange}
-          value="FIXME"
+          value={title}
           aria-label="Title"
         />
       </div>
@@ -48,7 +54,7 @@ function TodoForm({ initialFormData={ title: '', description: '', priority: '' }
           className="form-control"
           placeholder="Description"
           onChange={handleChange}
-          value="FIXME"
+          value={description}
           aria-label="Description"
         />
       </div>
@@ -60,7 +66,7 @@ function TodoForm({ initialFormData={ title: '', description: '', priority: '' }
             </label>
           <select id="newTodo-priority"
             name="priority"
-            value="FIXME"
+            value={priority}
             onChange={handleChange}
             className="form-control form-control-sm d-inline-flex"
           >
